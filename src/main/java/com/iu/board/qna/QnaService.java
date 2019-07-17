@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.iu.board.BoardDTO;
@@ -15,8 +16,6 @@ import com.iu.file.FileDAO;
 import com.iu.file.FileDTO;
 import com.iu.util.FileSaver;
 import com.iu.util.PageMaker;
-
-@Service
 public class QnaService implements BoardService {
 
 	@Inject
@@ -39,6 +38,7 @@ public class QnaService implements BoardService {
 		// fname = fileSaver.saveFile(realPath, multipartFile);
 		System.out.println(realPath);
 		ArrayList<FileDTO> files = new ArrayList<FileDTO>();
+		
 		
 		for(MultipartFile f : multipartFiles) {
 			// 폼에서 파일첨부 안했을 때 에러 방지

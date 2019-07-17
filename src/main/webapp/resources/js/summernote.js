@@ -13,8 +13,14 @@
 				$("#frm").submit();
 			}
 		});
+		$("#summernote2").summernote({
+			toolbar:[]
+		});
+		
 		
 		$("#summernote").summernote({
+			
+			height:800,
 			callbacks:{
 				onImageUpload:function(files){
 					var formData = new FormData();

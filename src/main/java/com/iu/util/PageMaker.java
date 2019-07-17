@@ -6,6 +6,8 @@ public class PageMaker {
 	private String kind;//title, writer, contents
 	private String search;
 	
+	
+	
 	//rownum
 	private int startRow;
 	private int lastRow;
@@ -15,8 +17,13 @@ public class PageMaker {
 	private int curBlock;
 	private int startNum;
 	private int lastNum;
+	
+	
 
 	
+	public void setPerPage(int perPage) {
+		this.perPage = perPage;
+	}
 	public int getTotalBlock() {
 		return totalBlock;
 	}

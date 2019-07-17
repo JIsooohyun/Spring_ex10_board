@@ -11,12 +11,16 @@ import com.iu.board.BoardDAO;
 import com.iu.board.BoardDTO;
 import com.iu.util.PageMaker;
 
-@Repository
+
 public class QnaDAO implements BoardDAO{
 	
 	@Inject
 	private SqlSession sqlSession;
 	private static final String NAMESPACE="QnaMapper.";
+	
+	public int setHitUpdate(int num)throws Exception{
+		return sqlSession.update(NAMESPACE+"setHitUpdate", num);
+	}
 	
 	//답글 사전작업
 	public int setReplyUpdate(BoardDTO qnaDTO) throws Exception{

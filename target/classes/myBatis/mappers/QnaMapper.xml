@@ -23,6 +23,8 @@
 		insert into qna values(#{num}, #{title}, #{writer}, #{contents}, sysdate, 0, ${num}, 0, 0)
 	</insert>
 	
+	
+	
 	<update id="setUpdate" parameterType="QnaDTO">
 		update qna set title=#{title}, contents=#{contents} where num = #{num}
 	</update>
@@ -85,6 +87,10 @@
 		</choose>
 		like '%'||#{search}||'%'
 	</select>
+	
+	<update id="setHitUpdate" parameterType="Integer">
+		update qna set hit=hit+1 where num=#{num}
+	</update>
 	
 	<select id="getSelect" parameterType="Integer" resultMap="qnaResult">
 		select * from qna Q full join files f

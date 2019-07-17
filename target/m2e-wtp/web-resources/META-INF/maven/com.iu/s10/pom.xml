@@ -23,6 +23,22 @@
 
 	
 	<dependencies>
+		
+		<!-- iu -->
+		
+		<!--  -->
+		
+		<!-- suji -->
+		
+		<!--  -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.9.8</version>
+		</dependency>
+		
+	
 		<!-- myBatis 시작 : dao와 연결하는 mapper 사용하기 위한 라이브러리 -->
 		<!-- mybatis -->
 		<dependency>
@@ -49,6 +65,14 @@
 			<version>11.2.0.3</version>
 		</dependency>
 		<!-- myBatis 끝 -->
+		
+		<!-- spring-tx -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-tx</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+		
 
 		<!-- commons-upload 시작 : 파일 올릴 때 사용하는 라이브러리 -->
 		<dependency>
@@ -76,7 +100,22 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		<!-- spring-aop -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-aop</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+			
 				
+		<!-- aspectjweaver -->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>${org.aspectj-version}</version>
+		</dependency>
+		
+		
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>

@@ -3,9 +3,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -26,8 +30,8 @@
 		<beans:property name="order" value="0" />
 	</beans:bean>
 	
-	
 	<beans:bean class="com.iu.interceptor.QnaInterceptor" id="qnaInterceptor" />
+	
 	<interceptors>
 		<interceptor>
 			<mapping path="/qna/*"/>
@@ -39,11 +43,27 @@
 		</interceptor>
 	</interceptors>
 	
+	<beans:bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<beans:property name="location" value="classpath:/properties/DataSource.properties" />
+	</beans:bean>
+	
+	
+	
 	<context:component-scan base-package="com.iu.s10" />
-	<context:component-scan base-package="com.iu.board.qna"/>
 	<context:component-scan base-package="com.iu.member" />
 	<context:component-scan base-package="com.iu.file" />
-	<context:component-scan base-package="com.iu.util" />
+	<context:component-scan base-package="com.iu.transfer" />
+	<context:component-scan base-package="com.iu.common" />
+	<context:component-scan base-package="com.iu.mall.product"/>
+	<context:component-scan base-package="com.iu.mall.cart" />
+	<context:component-scan base-package="com.iu.board.productQna"/>
+	
+	<beans:import resource="classpath:/spring/*"/>
+	<!-- <beans:import resource="classpath:/spring/context-file.xml"/>
+	<beans:import resource="classpath:/spring/context-data.xml"/>
+	<beans:import resource="classpath:/spring/context-common.xml"/> -->
+	<!-- <tx:annotation-driven/> -->
+	<aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
 	
 	<!-- <beans:import resource="classpath:/spring/config-context.xml"/> -->
 </beans:beans>

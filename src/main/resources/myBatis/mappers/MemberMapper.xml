@@ -9,6 +9,10 @@
 		id, pw, name, email, grade
 	</sql>
 	
+	<select id="getId" resultType="com.iu.member.MemberDTO" parameterType="com.iu.member.MemberDTO">
+		select id from member where id=#{id} 
+	</select>
+	
 	<insert id="setWrite" parameterType="com.iu.member.MemberDTO">
 		insert into member  (<include refid="colums" />) values(#{id}, #{pw}, #{name}, #{email}, 3)
 	</insert>

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +19,7 @@ import com.iu.board.BoardDTO;
 import com.iu.board.qna.QnaDTO;
 import com.iu.board.qna.QnaService;
 import com.iu.util.PageMaker;
+import com.iu.validator.QnaDTOValidate;
 
 @Controller
 @RequestMapping(value = "/qna/")
@@ -25,6 +27,8 @@ public class QnaController {
 	
 	@Inject
 	private QnaService qnaService;
+	@Inject
+	private QnaDTOValidate qnaDTOValidate;
 	
 	//model.addAttribute("board","qna") 
 	@ModelAttribute("board")
@@ -89,24 +93,33 @@ public class QnaController {
 	
 	//write
 	@RequestMapping(value = "qnaWrite", method = RequestMethod.POST)
-	public ModelAndView setWrite(BoardDTO qnaDTO, List<MultipartFile> f1, HttpSession session)throws Exception{
+	public ModelAndView setWrite(BoardDTO qnaDTO, List<MultipartFile> f1, HttpSession session, BindingResult bindingResult)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		int result = qnaService.setWrite(qnaDTO, f1, session);
+		//검증
+		qnaDTOValidate.validate(qnaDTO, bindingResult);
 		
-		if(result>0) {
-			mv.setViewName("redirect:./qnaList");
+		if(bindingResult.hasErrors()) {
+			mv.setViewName("board/boardWrite");
 		}else {
-			mv.addObject("message", "Write Fail");
-			mv.addObject("path", "./qnaList");
-			mv.setViewName("common/messageMove");
+		
+			int result = qnaService.setWrite(qnaDTO, f1, session);
+			
+			if(result>0) {
+				mv.setViewName("redirect:./qnaList");
+			}else {
+				mv.addObject("message", "Write Fail");
+				mv.addObject("path", "./qnaList");
+				mv.setViewName("common/messageMove");
+			}
 		}
 		return mv;
 	}
 
 	//write
 	@RequestMapping(value = "qnaWrite", method = RequestMethod.GET)
-	public String setWrite(Model model)throws Exception{
+	public String setWrite(BoardDTO boardDTO, Model model)throws Exception{
 		//model.addAttribute("board", "qna");
+		
 		return "board/boardWrite";
 	}
 	
