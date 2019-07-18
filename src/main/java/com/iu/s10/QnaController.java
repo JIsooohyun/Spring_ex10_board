@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,7 +21,6 @@ import com.iu.board.BoardDTO;
 import com.iu.board.qna.QnaDTO;
 import com.iu.board.qna.QnaService;
 import com.iu.util.PageMaker;
-import com.iu.validator.QnaDTOValidate;
 
 @Controller
 @RequestMapping(value = "/qna/")
@@ -27,10 +28,7 @@ public class QnaController {
 	
 	@Inject
 	private QnaService qnaService;
-	@Inject
-	private QnaDTOValidate qnaDTOValidate;
-	
-	//model.addAttribute("board","qna") 
+
 	@ModelAttribute("board")
 	public String board() {
 		return "qna";
@@ -96,7 +94,6 @@ public class QnaController {
 	public ModelAndView setWrite(BoardDTO qnaDTO, List<MultipartFile> f1, HttpSession session, BindingResult bindingResult)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		//검증
-		qnaDTOValidate.validate(qnaDTO, bindingResult);
 		
 		if(bindingResult.hasErrors()) {
 			mv.setViewName("board/boardWrite");
@@ -143,9 +140,25 @@ public class QnaController {
 		//mv.addObject("board", "qna");
 		mv.addObject("pager", pageMaker);
 		mv.setViewName("board/boardList");
+		if(lists.size()>0) {
+			throw new NullPointerException();
+		}
 		return mv;
 	}
 	
 	
-
+	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+

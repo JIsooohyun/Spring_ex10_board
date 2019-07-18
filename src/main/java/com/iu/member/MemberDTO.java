@@ -1,10 +1,21 @@
 package com.iu.member;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import com.iu.file.MemberFileDTO;
 
 public class MemberDTO {
+	
+	//키값이름
+	//Size.memberDTO.id
+	//NotNull.memberDTO.id
+	
+	@NotNull
 	private String id;
+	@Size(min = 6, max = 12)
 	private String pw;
+	@Size(min = 6, max = 12)
 	private String pw2;
 	private String name;
 	private String email;

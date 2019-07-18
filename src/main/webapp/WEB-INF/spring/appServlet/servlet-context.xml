@@ -15,6 +15,7 @@
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
+	
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
@@ -32,7 +33,16 @@
 	
 	<beans:bean class="com.iu.interceptor.QnaInterceptor" id="qnaInterceptor" />
 	
+	<beans:bean class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<beans:property name="defaultLocale" value="KR"></beans:property>
+	</beans:bean>
+	
+	
 	<interceptors>
+		
+			<beans:bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" id="localeChangeInterceptor">
+				<beans:property name="paramName" value="lang"></beans:property>
+			</beans:bean>
 		<interceptor>
 			<mapping path="/qna/*"/>
 			<beans:ref bean="qnaInterceptor"/>
